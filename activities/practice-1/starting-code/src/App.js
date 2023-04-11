@@ -1,34 +1,25 @@
-import { useEffect, useState } from 'react';
+import useKey from './hooks/useKey'
 
-function App() {
-  const [pressedKey, setPressedKey] = useState();
+const emoticone = (pressedKey) => {
+  let output = "";
 
-  useEffect(() => {
-    function keyPressedHandler(event) {
-      const pressedKey = event.key;
-
-      if (!['s', 'c', 'p'].includes(pressedKey)) {
-        alert('Invalid key!');
-        return;
-      }
-      setPressedKey(pressedKey);
-    }
-
-    window.addEventListener('keydown', keyPressedHandler);
-
-    return () => window.removeEventListener('keydown', keyPressedHandler);
-  }, []);
-
-  let output = '';
-
-  if (pressedKey === 's') {
-    output = '😊';
-  } else if (pressedKey === 'c') {
-    output = '😭';
-  } else if (pressedKey === 'p') {
-    output = '🎉';
+  if (pressedKey === "s") {
+    output = "😊";
+  } else if (pressedKey === "c") {
+    output = "😭";
+  } else if (pressedKey === "p") {
+    output = "🎉";
+  }else if (pressedKey === "d") {
+    output = ":-D";
   }
 
+  return output;
+};
+
+function App() {
+
+  const  output = emoticone(useKey(['s', 'c', 'p']));
+ 
   return (
     <main>
       <h1>Press a key!</h1>
